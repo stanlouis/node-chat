@@ -7,6 +7,7 @@ const publicPath = path.join(__dirname, "../public");
 const app = express();
 
 const port = process.env.PORT || 4000;
+
 let server = http.createServer(app);
 let io = socketIO(server);
 
@@ -30,6 +31,6 @@ io.on("connection", socket => {
   });
 });
 
-server.listen(port, socket => {
+server.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });

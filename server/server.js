@@ -6,7 +6,7 @@ const socketIO = require("socket.io");
 const publicPath = path.join(__dirname, "../public");
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 let server = http.createServer(app);
 let io = socketIO(server);
 
@@ -15,14 +15,14 @@ app.use(express.static(publicPath));
 io.on("connection", socket => {
   console.log("New user connected");
 
-  socket.emit("newEmail", {
-    from: "stanley@example.com",
+  socket.emit("newMessage", {
+    from: "Paul",
     text: "Hey. What is going on.",
     createdAt: new Date().toLocaleString()
   });
 
-  socket.on("createEmail", newEmail => {
-    console.log("createEmail", newEmail);
+  socket.on("createMessage", message => {
+    console.log("Message", message);
   });
 
   socket.on("disconnect", () => {
